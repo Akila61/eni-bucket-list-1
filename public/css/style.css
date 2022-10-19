@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 body {
-    background: linear-gradient(lightblue, #BADA55);
+    background: linear-gradient(lightblue, #ecb204);
     background-attachment: fixed;
     background-position: center center;
     background-size: cover;
@@ -28,6 +28,7 @@ img {
 }
 
 h1, h2, h3, h4 {
+    font-style: normal;
     margin-top: 0;
 }
 

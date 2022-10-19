@@ -17,6 +17,7 @@
     </head>
     <body>
 
+
         <div class="container">
             <header>
                 <img src="{{ asset('images/logo.svg') }}" alt="Bucket List">
@@ -25,6 +26,12 @@
                     <ul>
                         <li>
                             <a href="{{ path('homepage') }}">Accueil</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('about_us') }}">About us</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('wish_list') }}">Liste</a>
                         </li>
                     </ul>
                 </nav>
@@ -36,6 +43,7 @@
 
             <footer>
                 <div class="container">
+                    <a href="{{ path('main_legal') }}">Mentions légales</a>
                     © Bucket-List {{ 'now'|date('Y') }}
                 </div>
             </footer>

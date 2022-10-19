@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Legal stuff
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/legal.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+
+    <div>
+        <h1>Legal Stuff</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dolore, ea error eveniet
+            ex exercitationem id impedit ipsa mollitia natus odio officia, pariatur perspiciatis provident
+            quas quos recusandae, sit vero.</p>
+    </div>
+
+{% endblock %}
+
+
+

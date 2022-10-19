@@ -1,0 +1,1 @@
+alert('Test d\'alerte uniquement sur la page legal stuff');

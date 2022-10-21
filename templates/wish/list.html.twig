@@ -7,13 +7,13 @@
 {% endblock %}
 
 {% block body %}
+    <section class="grid">
+        {% for wish  in wishes %}
+        <article class="card">
+            <a href={{ path('wish_detail', {'id': wish.id}) }}>{{ wish.title }}
+            </a>
+        </article>
+                {% endfor %}
+    </section>
 
-        <div class="container">
-            <h1>Wish List :</h1>
-            <ul>
-                <li>Wish 1</li>
-                <li>Wish 2</li>
-                <li>Wish 3</li>
-            </ul>
-        </div>
 {% endblock %}

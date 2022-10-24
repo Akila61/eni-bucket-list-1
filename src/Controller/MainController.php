@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Serie;
 use App\Entity\Wish;
-use App\Form\SerieType;
 use App\Form\WishType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,22 +35,23 @@ class MainController extends AbstractController
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $wish = new Wish();
+        $wish->setIsPublished(true);
         $wish->setDateCreated(new \DateTime()); // Ou utiliser les LifeCycleCallbacks de Doctrine
         $wishForm = $this->createForm(WishType::class, $wish);
 
-        // Récupération des données pour les insérer dans l'objet $serie
+        // Récupération des données pour les insérer dans l'objet $wish
         $wishForm->handleRequest($request);
         dump($wish);
 
         // Vérifier si l'utilisateur est en train d'envoyer le formulaire
         if ($wishForm->isSubmitted() && $wishForm->isValid()) {
-            // Enregistrer la nouvelle série en BDD
+            // Enregistrer la nouveau souhait en BDD
             $em->persist($wish);
             $em->flush();
 
             $this->addFlash('success', 'l\'idée a bien été créée !');
 
-            // Rediriger l'internaute vers la liste des séries
+            // Rediriger l'internaute vers la liste des souhaits
             return $this->redirectToRoute('homepage');
         }
 

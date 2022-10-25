@@ -12,6 +12,12 @@
         <article class="card">
             <a href={{ path('wish_detail', {'id': wish.id}) }}>{{ wish.title }}
             </a>
+            <a href={{ path('wish_update', {'id': wish.id}) }}>MODIFIER
+            </a>
+            <form action="{{ path('wish_delete', {'id': wish.id}) }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ wish.id) }}">
+                <button>Supprimer</button>
+            </form>
         </article>
                 {% endfor %}
     </section>

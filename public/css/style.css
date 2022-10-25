@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 body {
-    background: linear-gradient(lightblue, #ecb204);
+    background: linear-gradient(lightblue, #BADA55);
     background-attachment: fixed;
     background-position: center center;
     background-size: cover;
@@ -12,6 +12,24 @@ body {
     max-width: 1000px;
     margin: auto;
     padding: 5px;
+}
+
+.grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.card {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transition: 0.2s;
+}
+
+.card:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 a {
@@ -28,7 +46,6 @@ img {
 }
 
 h1, h2, h3, h4 {
-    font-style: normal;
     margin-top: 0;
 }
 
@@ -52,15 +69,23 @@ nav ul {
     list-style: none;
     padding-left: 0;
 }
-.grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+.flash{
+    padding: 1rem;
+}
+.flash-success {
+    background-color: lightgreen;
+}
+.flash-error {
+    background-color: indianred;
 }
 
-.card {
-    padding: 1rem;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: rgba(0,0,0,0.15) 1.95px 1.95px 2.6px;
+.help-text {
+    font-size: 0.8rem;
+    color: darkgray;
+}
+
+label.required::after {
+    content: '*';
+    font-size: 2rem;
+    color: #B0413E;
 }

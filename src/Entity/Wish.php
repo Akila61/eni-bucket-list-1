@@ -14,6 +14,8 @@ class Wish
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: 'Veuillez saisir un titre')]
+    #[Assert\Length(min: 5, max: 250, minMessage: 'Le titre doit faire plus de 5 caractères.')]
     #[ORM\Column(length: 250)]
     private ?string $title = null;
 
@@ -24,7 +26,7 @@ class Wish
     private ?string $author = null;
 
     #[ORM\Column]
-    private ?bool $isPublished = null;
+    private ?bool $isPublished = true;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateCreated = null;

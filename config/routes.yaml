@@ -1,3 +1,8 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+#Pour gérer la redirection de la déconnexion :
+app_logout:
+    path: /logout
+    methods: GET

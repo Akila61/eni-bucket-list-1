@@ -31,10 +31,19 @@
                     <a href="{{ path('wish_list') }}">Souhaits</a>
                 </li>
                 <li>
-                    <a href="{{ path('wish_create') }}">Ajouter un souhait</a>
+                    <a href="{{ path('about_us') }}">A propos</a>
                 </li>
                 <li>
-                    <a href="{{ path('about_us') }}">A propos</a>
+                    {% if app.user %}
+                        <li>
+                            <a href="{{ path('wish_create') }}">Ajouter un souhait</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_logout') }}">Deconnexion</a>
+                        </li>
+                    {% else %}
+                        <a href="{{ path('app_login') }}">Connexion</a>
+                    {% endif %}
                 </li>
             </ul>
         </nav>

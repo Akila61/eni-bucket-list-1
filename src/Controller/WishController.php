@@ -14,12 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/wish')]
 class WishController extends AbstractController
 {
-
     #[Route('/', name: 'wish_list')]
     public function list(WishRepository $wishRepository): Response
     {
         // Récupérer la liste des souhaits
-        $wishes = $wishRepository->findAll();
+        $wishes = $wishRepository->findAllWithCategories();
 
         return $this->render('wish/list.html.twig', [
             'wishes' => $wishes
@@ -35,44 +34,38 @@ class WishController extends AbstractController
             'wish' => $wish
         ]);
     }
-    #[Route('/new-wish', name: 'new_wish', methods:['GET','POST'])]
-    public function new(Request $request, EntityManagerInterface $em): Response
+
+    #[Route('/create', name: 'wish_create', methods: ['GET', 'POST'])]
+    public function create(Request $request, EntityManagerInterface $em): Response
     {
         $wish = new Wish();
-        $wish -> setIsPublished(true);
-        $wish->setDateCreated(new \DateTime()); // Ou utiliser les LifeCycleCallbacks de Doctrine
-        $wishForm = $this->createForm(WishType::class, $wish);
+        $formWish = $this->createForm(WishType::class, $wish);
 
-        // Récupération des données pour les insérer dans l'objet $serie
-        $wishForm->handleRequest($request);
-        dump($wish);
+        $formWish->handleRequest($request);
 
-        // Vérifier si l'utilisateur est en train d'envoyer le formulaire
-        if ($wishForm->isSubmitted() && $wishForm->isValid()) {
-            // Enregistrer la nouvelle série en BDD
+        if ($formWish->isSubmitted() && $formWish->isValid()) {
             $em->persist($wish);
             $em->flush();
 
             $this->addFlash('success', 'Le souhait a bien été créé');
 
-            // Rediriger l'internaute vers la liste des séries
-            return $this->redirectToRoute('wish_detail', ['id' =>$wish->getId()]);
+            return $this->redirectToRoute('wish_detail', ['id' => $wish->getId()]);
         }
 
-        return $this->render('main/new.html.twig', [
-            'wishForm' => $wishForm->createView()
+        return $this->render('wish/create.html.twig', [
+            'formWish' => $formWish->createView()
         ]);
     }
 
-    #[Route('/update/{id}', name: 'wish_update', requirements: ['id'=>'\d+'], methods:['GET','POST'])]
+    #[Route('/update/{id}', name: 'wish_update', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function update(Request $request, EntityManagerInterface $em, Wish $wish): Response
     {
-        $wishForm = $this->createForm(WishType::class, $wish);
+        $formWish = $this->createForm(WishType::class, $wish);
 
-        $wishForm->handleRequest($request);
+        $formWish->handleRequest($request);
 
-        if ($wishForm->isSubmitted() && $wishForm->isValid()) {
-            $em->persist($wish);
+        if ($formWish->isSubmitted() && $formWish->isValid()) {
+            //$em->persist($wish);
             $em->flush();
 
             $this->addFlash('success', 'Le souhait a bien été modifié');
@@ -82,9 +75,10 @@ class WishController extends AbstractController
 
         return $this->render('wish/update.html.twig', [
             'wish' => $wish,
-            'wishForm' => $wishForm->createView()
+            'formWish' => $formWish->createView()
         ]);
     }
+
     #[Route('/delete/{id}', name: 'wish_delete', methods: ['POST'])]
     public function delete(Request $request, EntityManagerInterface $em, Wish $wish): Response
     {
@@ -97,5 +91,4 @@ class WishController extends AbstractController
 
         return $this->redirectToRoute('wish_list');
     }
-
 }

@@ -1,25 +1,32 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-
-{% block title %}{{ parent()}}
-    - Liste
-    
+{% block title %}
+    {{ parent() }}
+    Liste des souhaits
 {% endblock %}
 
 {% block body %}
+
+    <h1>Liste des souhaits</h1>
+
     <section class="grid">
-        {% for wish  in wishes %}
-        <article class="card">
-            <a href={{ path('wish_detail', {'id': wish.id}) }}>{{ wish.title }}
-            </a>
-            <a href={{ path('wish_update', {'id': wish.id}) }}>MODIFIER
-            </a>
-            <form action="{{ path('wish_delete', {'id': wish.id}) }}" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ wish.id) }}">
-                <button>Supprimer</button>
-            </form>
-        </article>
-                {% endfor %}
+        {% for wish in wishes %}
+            <article class="card">
+                <a href="{{ path('wish_detail', {'id': wish.id}) }}">
+                    {{ wish.title }}
+                </a>
+                <div>
+                    <em>{{ wish.category.name }}</em>
+                </div>
+                <a href="{{ path('wish_update', {'id': wish.id}) }}">
+                    Modifier
+                </a>
+                <form action="{{ path('wish_delete', {'id': wish.id}) }}" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ wish.id) }}">
+                    <button>Supprimer</button>
+                </form>
+            </article>
+        {% endfor %}
     </section>
 
 {% endblock %}

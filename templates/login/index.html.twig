@@ -9,15 +9,16 @@
 
     <form action="{{ path('app_login') }}" method="post">
         <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+        <input placeholder="Email" type="text" id="username" name="_username" value="{{ last_username }}"/>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
+        <input placeholder="Mot de passe" type="password" id="password" name="_password"/>
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <button type="submit">login</button>
+        <button type="submit">Connexion</button>
     </form>
+    <br><br>
     <a href="{{ path('app_register') }}">Créer un compte</a>
 
 <style>
@@ -25,13 +26,4 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello  ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/wamp64/www/eni-bucket-list-1/src/Controller/LoginController.php'|file_link(0) }}">src/Controller/LoginController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/wamp64/www/eni-bucket-list-1/templates/login/index.html.twig'|file_link(0) }}">templates/login/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}

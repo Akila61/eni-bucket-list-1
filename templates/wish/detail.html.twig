@@ -2,14 +2,26 @@
 
 {% block title %}
     {{ parent() }}
-    - Nouveau souhait
+    Détails d'un souhait
 {% endblock %}
 
 {% block body %}
 
-    <h1>Création d'un nouveau souhait</h1>
+    <h1>{{ wish.title }}</h1>
 
-    {% include 'wish/_form.html.twig' with { 'btnText': 'Ajouter' } %}
+    <div>
+        <time datetime="{{ wish.dateCreated|date('Y-m-d') }}">
+            {{ wish.dateCreated|date('d/m/Y') }}
+        </time>
+        par
+        <em>{{ wish.author }}</em>
+    </div>
+
+    <div>
+        <em>{{ wish.category.name }}</em>
+    </div>
+
+    <p>{{ wish.description }}</p>
 
 {% endblock %}
 
